@@ -26,6 +26,8 @@ docker --version
 instagram-downloader/
 │
 ├── Dockerfile
+├── Dockerfile.optimizado
+├── Dockerfile.multistage
 ├── docker-compose.yml
 ├── package.json
 ├── package-lock.json
@@ -42,7 +44,7 @@ git clone https://github.com/tu-usuario/instagram-downloader.git
 cd instagram-downloader
 ```
 
-2️⃣ Ejecutar TODO con Docker
+2️⃣ Ejecutar TODO con Docker (usa el `Dockerfile` por defecto)
 ```bash
 docker compose up --build
 ```
@@ -53,6 +55,35 @@ docker compose up --build
 - Instala dependencias
 - Ejecuta Node.js
 - Levanta el servidor automáticamente
+
+## 🧩 Elegir el Dockerfile que quieras usar
+
+Puedes ejecutar el proyecto con cualquiera de estos archivos:
+
+- `Dockerfile`
+- `Dockerfile.optimizado`
+- `Dockerfile.multistage`
+
+### Usar `Dockerfile.optimizado`
+```bash
+DOCKERFILE=Dockerfile.optimizado docker compose up --build
+```
+
+### Usar `Dockerfile.multistage`
+```bash
+DOCKERFILE=Dockerfile.multistage docker compose up --build
+```
+
+> En Windows PowerShell:
+> ```powershell
+> $env:DOCKERFILE = 'Dockerfile.optimizado'
+> docker compose up --build
+> ```
+
+> En Windows cmd:
+> ```cmd
+> set DOCKERFILE=Dockerfile.optimizado&& docker compose up --build
+> ```
 
 3️⃣ Abrir la aplicación
 
