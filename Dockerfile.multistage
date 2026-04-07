@@ -1,0 +1,28 @@
+# ---------- BUILD ----------
+FROM node:20 AS builder
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y yt-dlp ffmpeg
+
+COPY package*.json ./
+RUN npm install --omit=dev
+
+COPY . .
+
+# ---------- RUNTIME ----------
+FROM node:20-slim
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y yt-dlp ffmpeg && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+COPY --from=builder /app /app
+
+COPY cookies.txt /app/cookies.txt
+RUN mkdir -p /app/downloads
+
+EXPOSE 3000
+
+CMD ["node", "index.js"]

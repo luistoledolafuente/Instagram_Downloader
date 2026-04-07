@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Instagram Downloader</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>📥 Instagram Video Downloader</h1>
+    <p class="subtitle">
+      Descarga videos y reels de Instagram de forma rápida y sencilla
+    </p>
+
+    <form action="/download" method="POST">
+      <input
+        type="url"
+        name="url"
+        placeholder="https://www.instagram.com/reel/..."
+        required
+      />
+      <button type="submit">Descargar</button>
+    </form>
+
+    <% if (message) { %>
+      <div class="message <%= success ? 'success' : 'error' %>">
+        <%= message %>
+      </div>
+    <% } %>
+  </div>
+
+  <footer>
+    <p>Desarrollado por Luis Toledo | Docker + Node.js</p>
+  </footer>
+
+</body>
+</html>
