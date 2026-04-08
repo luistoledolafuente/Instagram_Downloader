@@ -39,7 +39,7 @@ instagram-downloader/
 
 1️⃣ Clonar el repositorio
 ```bash
-git clone https://github.com/tu-usuario/instagram-downloader.git
+git clone https://github.com/luistoledolafuente/Instagram_Downloader.git
 cd instagram-downloader
 ```
 
@@ -50,15 +50,14 @@ docker build -t instagram-downloader .
 
 3️⃣ Ejecutar el contenedor
 ```bash
-docker run --rm -p 3000:3000 -v "${PWD}/downloads:/app/downloads" -v "${PWD}/cookies.txt:/app/cookies.txt:ro" instagram-downloader
+docker run --rm -p 3000:3000 -v "${PWD}/downloads:/app/downloads" instagram-downloader
 ```
 
-📌 Este comando:
+📌 Nota:
 
-- Construye la imagen (paso anterior)
-- Instala dependencias
-- Ejecuta Node.js
-- Levanta el servidor automáticamente
+- `docker build` crea la imagen.
+- `docker run` inicia el contenedor usando la imagen ya construida.
+- Si quieres usar un Dockerfile diferente, debes construir otra imagen con un tag distinto.
 
 ## 🧩 Elegir el Dockerfile que quieras usar
 
@@ -70,29 +69,34 @@ Puedes ejecutar el proyecto con cualquiera de estos archivos:
 
 ### Usar `Dockerfile.optimizado`
 ```bash
-docker build -f Dockerfile.optimizado -t instagram-downloader .
+docker build -f Dockerfile.optimizado -t instagram-downloader:optimizado .
 ```
 
 ### Usar `Dockerfile.multistage`
 ```bash
-docker build -f Dockerfile.multistage -t instagram-downloader .
+docker build -f Dockerfile.multistage -t instagram-downloader:multistage .
 ```
 
 4️⃣ Ejecutar el contenedor con la imagen creada
 ```bash
-docker run --rm -p 3000:3000 -v "${PWD}/downloads:/app/downloads" -v "${PWD}/cookies.txt:/app/cookies.txt:ro" instagram-downloader
+docker run instagram-downloader:optimizado
 ```
+
+> Para usar la imagen multistage construida:
+> ```bash
+>docker run -it instagram-downloader:multistage
+> ```
 
 > En Windows PowerShell:
 > ```powershell
 > docker build -f Dockerfile.optimizado -t instagram-downloader .
-> docker run --rm -p 3000:3000 -v "${PWD}/downloads:/app/downloads" -v "${PWD}/cookies.txt:/app/cookies.txt:ro" instagram-downloader
+> docker run --rm -p 3000:3000 -v "${PWD}/downloads:/app/downloads" instagram-downloader
 > ```
 
 > En Windows cmd:
 > ```cmd
 > docker build -f Dockerfile.optimizado -t instagram-downloader .
-> docker run --rm -p 3000:3000 -v "%cd%/downloads:/app/downloads" -v "%cd%/cookies.txt:/app/cookies.txt:ro" instagram-downloader
+> docker run --rm -p 3000:3000 -v "%cd%/downloads:/app/downloads" instagram-downloader
 > ```
 
 ### Detener el contenedor

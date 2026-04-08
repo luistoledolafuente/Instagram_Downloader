@@ -55,6 +55,14 @@ app.post('/download', (req, res) => {
     '-o', path.join(downloadsDir, '%(id)s.%(ext)s')
   ]);
 
+  ytdlp.stdout.on('data', (data) => {
+    console.log(`yt-dlp info: ${data}`);
+  });
+
+  ytdlp.stderr.on('data', (data) => {
+    console.error(`yt-dlp error: ${data}`);
+  });
+
   ytdlp.on('close', (code) => {
     if (code !== 0) {
       return res.render('index', {
